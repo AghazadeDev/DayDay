@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  HomeViewController.swift
 //  DayDay
 //
 //  Created by Alikhan Aghazada on 22.09.25.
@@ -7,8 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-
+class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

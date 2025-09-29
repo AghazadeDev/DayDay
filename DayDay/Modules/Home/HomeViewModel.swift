@@ -8,5 +8,15 @@
 import Foundation
 
 final class HomeViewModel {
+    weak var coordinator: HomeCoordinator?
+    
+    init(coordinator: HomeCoordinator?) {
+        self.coordinator = coordinator
+    }
+    
     var title: String { "Home" }
+    
+    func didTapAddNote() {
+        coordinator?.showAddNote()
+    }
 }

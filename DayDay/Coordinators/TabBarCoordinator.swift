@@ -9,7 +9,11 @@ import UIKit
 
 final class TabBarCoordinator {
     let tabBarController: UITabBarController
-    
+
+    private var homeCoordinator: HomeCoordinator?
+    private var analyticsCoordinator: AnalyticsCoordinator?
+    private var settingsCoordinator: SettingsCoordinator?
+
     init() {
         self.tabBarController = UITabBarController()
     }
@@ -26,6 +30,10 @@ final class TabBarCoordinator {
         homeCoordinator.start()
         analyticsCoordinator.start()
         settingsCoordinator.start()
+
+        self.homeCoordinator = homeCoordinator
+        self.analyticsCoordinator = analyticsCoordinator
+        self.settingsCoordinator = settingsCoordinator
         
         tabBarController.viewControllers = [homeNav, analyticsNav, settingsNav]
         
@@ -35,5 +43,8 @@ final class TabBarCoordinator {
         tabBarController.tabBar.items?[1].image = UIImage(systemName: "chart.bar.xaxis")
         tabBarController.tabBar.items?[2].title = "Settings"
         tabBarController.tabBar.items?[2].image = UIImage(systemName: "gear")
+        
+        tabBarController.tabBar.tintColor = .green
+        tabBarController.tabBar.unselectedItemTintColor = .red
     }
 }

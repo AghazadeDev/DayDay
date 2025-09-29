@@ -1,5 +1,5 @@
 //
-//  SettingsViewController.swift
+//  AddNoteViewController.swift
 //  DayDay
 //
 //  Created by Alikhan Aghazada on 29.09.25.
@@ -7,10 +7,10 @@
 
 import UIKit
 
-final class SettingsViewController: UIViewController {
-    private let viewModel: SettingsViewModel
+final class AddNoteViewController: UIViewController {
+    private let viewModel: AddNoteViewModel
     
-    init(viewModel: SettingsViewModel) {
+    init(viewModel: AddNoteViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }

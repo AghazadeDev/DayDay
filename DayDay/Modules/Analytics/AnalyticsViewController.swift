@@ -19,7 +19,7 @@ class AnalyticsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .systemBlue.withAlphaComponent(0.1)
+        view.backgroundColor = .systemBackground
         title = viewModel.title
     }
 }

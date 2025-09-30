@@ -8,7 +8,7 @@
 import Foundation
 
 final class HomeViewModel {
-    weak var coordinator: HomeCoordinator?
+    private let coordinator: HomeCoordinator?
     
     init(coordinator: HomeCoordinator?) {
         self.coordinator = coordinator

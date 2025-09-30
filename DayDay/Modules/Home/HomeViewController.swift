@@ -13,19 +13,17 @@ final class HomeViewController: UIViewController {
     private let viewModel: HomeViewModel
     
     //MARK: - Views
-    private let addNoteView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .systemGreen.withAlphaComponent(0.1)
-        view.layer.cornerRadius = 30
+    private lazy var addButton: UIButton = {
+        let button = UIButton()
+        button.backgroundColor = .systemPurple.withAlphaComponent(0.3)
+        button.layer.cornerRadius = 30
+        button.clipsToBounds = true
+        let plusImage = UIImage(systemName: "plus")
+        button.setImage(plusImage, for: .normal)
+        button.tintColor = .white
+        button.configuration = .glass()
+        button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
         
-        return view
-    }()
-
-    private let addNoteButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.setImage(.init(systemName: "plus"), for: .normal)
-        button.tintColor = .systemGreen
-        button.addTarget(self, action: #selector(didTapAddNote), for: .touchUpInside)
         return button
     }()
     
@@ -46,25 +44,20 @@ final class HomeViewController: UIViewController {
         configureContraints()
     }
     
+    // MARK: - Private methods
     private func addSubViews() {
-        view.addSubview(addNoteView)
-        addNoteView.addSubview(addNoteButton)
+        view.addSubview(addButton)
     }
     
     private func configureContraints() {
-        addNoteView.snp.makeConstraints { make in
+        addButton.snp.makeConstraints { (make) in
             make.trailing.equalToSuperview().inset(24)
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.size.equalTo(60)
         }
-        
-        addNoteButton.snp.makeConstraints { make in
-            make.center.equalToSuperview()
-            make.size.equalTo(40)
-        }
     }
     
-    @objc private func didTapAddNote() {
+    @objc private func addTapped() {
         viewModel.didTapAddNote()
     }
 }

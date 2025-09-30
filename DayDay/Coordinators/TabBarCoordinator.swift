@@ -44,7 +44,7 @@ final class TabBarCoordinator {
         tabBarController.tabBar.items?[2].title = "Settings"
         tabBarController.tabBar.items?[2].image = UIImage(systemName: "gear")
         
-        tabBarController.tabBar.tintColor = .green
-        tabBarController.tabBar.unselectedItemTintColor = .red
+        tabBarController.tabBar.tintColor = .systemPurple
+        tabBarController.tabBarMinimizeBehavior = .onScrollDown
     }
 }

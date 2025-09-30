@@ -12,6 +12,15 @@ final class HomeViewController: UIViewController {
     // MARK: - ViewModel
     private let viewModel: HomeViewModel
     
+    private let strings: [String] = [
+        "Finance",
+        "Health",
+        "Love",
+        "Work",
+        "Personal",
+        "Other",
+    ]
+    
     //MARK: - Views
     private lazy var addButton: UIButton = {
         let button = UIButton()
@@ -27,6 +36,19 @@ final class HomeViewController: UIViewController {
         return button
     }()
     
+    // TODO: - Make UICollectionViewCompositionalLayout
+    private let collectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .vertical
+        layout.minimumInteritemSpacing = 10
+        layout.minimumLineSpacing = 10
+        layout.itemSize = .init(width: UIScreen.main.bounds.width / 2 - 20 , height: 100)
+        layout.sectionInset = .init(top: 10, left: 10, bottom: 10, right: 10)
+        let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
+        return collectionView
+    }()
+    
     // MARK: - Init
     init(viewModel: HomeViewModel) {
         self.viewModel = viewModel
@@ -40,13 +62,18 @@ final class HomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .systemBackground
         title = viewModel.title
+        collectionView.dataSource = self
+        collectionView.delegate = self
+        collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         addSubViews()
         configureContraints()
     }
     
     // MARK: - Private methods
     private func addSubViews() {
+        view.addSubview(collectionView)
         view.addSubview(addButton)
+
     }
     
     private func configureContraints() {
@@ -55,9 +82,34 @@ final class HomeViewController: UIViewController {
             make.bottom.equalTo(view.safeAreaLayoutGuide).inset(24)
             make.size.equalTo(60)
         }
+        
+        collectionView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
     }
     
     @objc private func addTapped() {
         viewModel.didTapAddNote()
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension HomeViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        strings.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
+        cell.configure(title: strings[indexPath.row])
+        
+        return cell
+    }
+}
+
+// MARK: - UICollectionViewDelegate
+extension HomeViewController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        print("")
     }
 }

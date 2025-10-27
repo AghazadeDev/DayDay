@@ -65,7 +65,8 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     private func configureContraints() {
         effectView.snp.makeConstraints { make in
-            make.edges.equalToSuperview()
+            make.horizontalEdges.top.equalToSuperview()
+            make.bottom.equalToSuperview().inset(8)
         }
         titlesStackView.snp.makeConstraints { make in
             make.edges.equalToSuperview().inset(16)

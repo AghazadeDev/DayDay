@@ -10,6 +10,7 @@ import SnapKit
 import Alamofire
 import Speech
 import AVFoundation
+import Accelerate
 
 struct GeneratedNotesResponse: Sendable {
     let generatedNotes: [Note]
@@ -69,6 +70,9 @@ final class AddNoteViewController: UIViewController {
         }
     }
     
+    // Копим распознанный текст и показываем только по завершении
+    private var lastPartialText: String = ""
+    
     // Insets state for keyboard handling
     private var originalContentInset: UIEdgeInsets = .zero
     private var originalScrollIndicatorInsets: UIEdgeInsets = .zero
@@ -81,6 +85,10 @@ final class AddNoteViewController: UIViewController {
     private var isRecording = false
     private var speechAuthStatus: SFSpeechRecognizerAuthorizationStatus = .notDetermined
     private var micGranted: Bool = false
+    
+    // Для визуализации уровня
+    private var currentLevelSmoothed: CGFloat = 0
+    private var levelSmoothingFactor: CGFloat = 0.3
     
     // MARK: - UI
     
@@ -190,6 +198,13 @@ final class AddNoteViewController: UIViewController {
         return b
     }()
     
+    // Пульсирующие круги вокруг микрофона
+    private let micPulseView: PulsingMicView = {
+        let v = PulsingMicView()
+        v.alpha = 0
+        return v
+    }()
+    
     private lazy var saveButton: UIButton = {
         let b = UIButton(type: .system)
         b.setTitle("Сохранить", for: .normal)
@@ -202,6 +217,9 @@ final class AddNoteViewController: UIViewController {
     }()
     
     private var bottomBarBottomConstraint: Constraint?
+    
+    // Полноэкранный оверлей прослушивания
+    private var listeningOverlay: ListeningOverlayView?
     
     // MARK: - Init
     init(viewModel: AddNoteViewModel) {
@@ -263,6 +281,9 @@ final class AddNoteViewController: UIViewController {
         bottomBar.addSubview(bottomSeparator)
         bottomBar.addSubview(bottomStack)
         
+        // Пульсация — под кнопкой, но внутри того же контейнера
+        bottomBar.addSubview(micPulseView)
+        
         bottomStack.addArrangedSubview(clearButton)
         bottomStack.addArrangedSubview(UIView()) // spacer
         bottomStack.addArrangedSubview(micButton)
@@ -308,6 +329,14 @@ final class AddNoteViewController: UIViewController {
             make.bottom.equalTo(bottomBar.snp.bottom).inset(8)
             make.leading.equalTo(bottomBar.snp.leading).offset(16)
             make.trailing.equalTo(bottomBar.snp.trailing).inset(16)
+        }
+        
+        // Пульсация должна быть центрирована на месте микрофона (38x38), чуть больше
+        micPulseView.snp.makeConstraints { make in
+            // Привяжем к micButton через layout pass
+            make.centerY.equalTo(micButton.snp.centerY)
+            make.centerX.equalTo(micButton.snp.centerX)
+            make.width.height.equalTo(56) // шире кнопки, чтобы видны были круги
         }
         
         // Сохраняем начальные insets и устанавливаем нижний отступ под панель
@@ -753,13 +782,21 @@ private extension AddNoteViewController {
             showSimpleAlert(title: "Ошибка", message: "Не удалось создать запрос распознавания.")
             return
         }
+        // Получаем промежуточные, но не показываем в UI до завершения
         recognitionRequest.shouldReportPartialResults = true
         
         let inputNode = audioEngine.inputNode
         let recordingFormat = inputNode.outputFormat(forBus: 0)
         inputNode.removeTap(onBus: 0)
+        
+        // Полноэкранный оверлей "как в GPT"
+        showListeningOverlay()
+        
+        // Устанавливаем tap и считаем уровень сигнала
         inputNode.installTap(onBus: 0, bufferSize: 1024, format: recordingFormat) { [weak self] buffer, _ in
-            self?.recognitionRequest?.append(buffer)
+            guard let self else { return }
+            self.recognitionRequest?.append(buffer)
+            self.updateLevelFrom(buffer: buffer)
         }
         
         audioEngine.prepare()
@@ -767,23 +804,24 @@ private extension AddNoteViewController {
             try audioEngine.start()
         } catch {
             showSimpleAlert(title: "Запись", message: "Не удалось запустить аудиодвижок: \(error.localizedDescription)")
+            hideListeningOverlay()
             return
         }
         
-        // UI
+        // UI: включаем анимацию, меняем иконку
+        micPulseView.start()
         micButton.setImage(UIImage(systemName: "mic.fill"), for: .normal)
         isRecording = true
+        lastPartialText = ""
         
         recognitionTask = recognizer.recognitionTask(with: recognitionRequest) { [weak self] result, error in
             guard let self else { return }
             if let result = result {
-                let newText = result.bestTranscription.formattedString
-                DispatchQueue.main.async {
-                    self.textView.text = newText
-                    self.text = newText
-                }
+                // только сохраняем последнюю версию текста
+                self.lastPartialText = result.bestTranscription.formattedString
             }
             
+            // Завершение — ошибка или финал
             if error != nil || (result?.isFinal ?? false) {
                 DispatchQueue.main.async {
                     self.stopRecording()
@@ -805,7 +843,16 @@ private extension AddNoteViewController {
         recognitionTask = nil
         recognitionRequest = nil
         
+        // UI: выключаем анимацию, возвращаем иконку
+        micPulseView.stop()
         micButton.setImage(UIImage(systemName: "mic"), for: .normal)
+        hideListeningOverlay()
+        
+        // Подставляем финальный текст один раз
+        if !lastPartialText.isEmpty {
+            textView.text = lastPartialText
+            text = lastPartialText
+        }
         
         let audioSession = AVAudioSession.sharedInstance()
         try? audioSession.setActive(false, options: .notifyOthersOnDeactivation)
@@ -827,3 +874,52 @@ private extension AddNoteViewController {
         }
     }
 }
+
+// MARK: - Listening overlay + level metering
+private extension AddNoteViewController {
+    func showListeningOverlay() {
+        if listeningOverlay == nil {
+            let overlay = ListeningOverlayView()
+            overlay.onStop = { [weak self] in
+                self?.stopRecording()
+            }
+            listeningOverlay = overlay
+        }
+        if let overlay = listeningOverlay {
+            overlay.present(in: view)
+        }
+    }
+    
+    func hideListeningOverlay() {
+        listeningOverlay?.dismiss()
+    }
+    
+    // Обновляем уровень из аудиобуфера и прокидываем в overlay и мини-пульс
+    func updateLevelFrom(buffer: AVAudioPCMBuffer) {
+        guard let channelData = buffer.floatChannelData?.pointee else { return }
+        let frameLength = Int(buffer.frameLength)
+        if frameLength == 0 { return }
+        
+        // Вычисляем RMS
+        var rms: Float = 0
+        vDSP_measqv(channelData, 1, &rms, vDSP_Length(frameLength))
+        rms = sqrtf(rms) // RMS амплитуда (0...1 при нормализации)
+        
+        // Переведём в дБFS и нормализуем в 0...1
+        // dbFS ~ 20 * log10(rms), где 0 дБ = full scale, -80 дБ ~ тишина
+        let minDb: Float = -60 // нижний порог
+        let maxDb: Float = 0
+        var db = 20 * log10f(max(rms, 0.000_000_1))
+        db = max(minDb, min(maxDb, db))
+        let normalized = CGFloat((db - minDb) / (maxDb - minDb)) // 0...1
+        
+        // Сглаживание
+        currentLevelSmoothed = currentLevelSmoothed * (1 - levelSmoothingFactor) + normalized * levelSmoothingFactor
+        
+        DispatchQueue.main.async {
+            self.listeningOverlay?.update(level: self.currentLevelSmoothed)
+            self.micPulseView.updateLevel(self.currentLevelSmoothed)
+        }
+    }
+}
+

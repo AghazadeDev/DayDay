@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B50AE4F2E809BC6004CAE6F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 1B50AE4E2E809BC6004CAE6F /* SnapKit */; };
+		1BD0151D2E97E9D0000CE82E /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 1BD0151C2E97E9D0000CE82E /* Alamofire */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +42,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B50AE4F2E809BC6004CAE6F /* SnapKit in Frameworks */,
+				1BD0151D2E97E9D0000CE82E /* Alamofire in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,6 +86,7 @@
 			name = DayDay;
 			packageProductDependencies = (
 				1B50AE4E2E809BC6004CAE6F /* SnapKit */,
+				1BD0151C2E97E9D0000CE82E /* Alamofire */,
 			);
 			productName = DayDay;
 			productReference = 1B31C0E92E80959B008B14D5 /* DayDay.app */;
@@ -115,6 +118,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				1B50AE4D2E809BC6004CAE6F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				1BD0151B2E97E9D0000CE82E /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 1B31C0EA2E80959B008B14D5 /* Products */;
@@ -157,6 +161,9 @@
 				DEVELOPMENT_TEAM = 48A6TNMQZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DayDay/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -193,6 +200,9 @@
 				DEVELOPMENT_TEAM = 48A6TNMQZ7;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = DayDay/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = NSMicrophoneUsageDescription;
+				INFOPLIST_KEY_NSSpeechRecognitionUsageDescription = NSSpeechRecognitionUsageDescription;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -372,6 +382,14 @@
 				minimumVersion = 5.7.1;
 			};
 		};
+		1BD0151B2E97E9D0000CE82E /* XCRemoteSwiftPackageReference "Alamofire" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Alamofire/Alamofire";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.10.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -379,6 +397,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 1B50AE4D2E809BC6004CAE6F /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
+		};
+		1BD0151C2E97E9D0000CE82E /* Alamofire */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1BD0151B2E97E9D0000CE82E /* XCRemoteSwiftPackageReference "Alamofire" */;
+			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

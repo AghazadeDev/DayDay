@@ -17,6 +17,12 @@ class HomeCoordinator: BaseCoordinator {
     func showAddNote() {
         let detailsVM = AddNoteViewModel()
         let detailsVC = AddNoteViewController(viewModel: detailsVM)
-        navigationController?.pushViewController(detailsVC, animated: true)
+        navigationController?.present(detailsVC, animated: true)
+    }
+    
+    func showNotes(for category: String) {
+        let vc = NotesByCategoryViewController(category: category)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
+

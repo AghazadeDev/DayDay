@@ -19,4 +19,9 @@ final class HomeViewModel {
     func didTapAddNote() {
         coordinator?.showAddNote()
     }
+    
+    func didSelectCategory(name: String) {
+        coordinator?.showNotes(for: name)
+    }
 }
+

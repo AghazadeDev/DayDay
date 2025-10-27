@@ -7,161 +7,185 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E3AEB0CB-BBDD-4143-AD68-9EDBE5BEAA41"
+            uuid = "4C9F3DDF-02D2-476E-BB4D-F4FA71FE0C87"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
+            filePath = "DayDay/Modules/Home/HomeViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "showAddNote()"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "4C9F3DDF-02D2-476E-BB4D-F4FA71FE0C87 - 6377006671e519c0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Alamofire.DataResponse&lt;DayDay.Categories, Alamofire.AFError&gt;) -&gt; () in DayDay.HomeViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98">
+               </Location>
+               <Location
+                  uuid = "4C9F3DDF-02D2-476E-BB4D-F4FA71FE0C87 - 6377006671e519c0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 @Sendable (Alamofire.DataResponse&lt;DayDay.Categories, Alamofire.AFError&gt;) -&gt; () in DayDay.HomeViewController.viewDidLoad() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/HomeViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "98"
+                  endingLineNumber = "98">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6B6E4048-1FD2-4EF4-A714-D66CB904F61A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "345"
+            endingLineNumber = "345"
+            landmarkName = "AddNoteViewController"
+            landmarkType = "3">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "561C7FBE-45DD-4F59-9EF9-F20D19CA34C3"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "393"
+            endingLineNumber = "393"
+            landmarkName = "saveTapped()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "561C7FBE-45DD-4F59-9EF9-F20D19CA34C3 - cf5cd1d9aad38fbe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;DayDay.PostDailyNotesResponse, Swift.Error&gt;) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in closure #3 @Swift.MainActor () -&gt; () in closure #1 (Swift.Result&lt;DayDay.GeneratedNotesResponse, Swift.Error&gt;) -&gt; () in DayDay.AddNoteViewController.saveTapped() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "393"
+                  endingLineNumber = "393">
+               </Location>
+               <Location
+                  uuid = "561C7FBE-45DD-4F59-9EF9-F20D19CA34C3 - cf5cd1d9aad38fbe"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;DayDay.PostDailyNotesResponse, Swift.Error&gt;) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in closure #3 @Swift.MainActor () -&gt; () in closure #1 (Swift.Result&lt;DayDay.GeneratedNotesResponse, Swift.Error&gt;) -&gt; () in DayDay.AddNoteViewController.saveTapped() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "393"
+                  endingLineNumber = "393">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F3194A4A-6B22-4660-8E17-1C73A0C395CA"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "388"
+            endingLineNumber = "388"
+            landmarkName = "saveTapped()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "851CE31B-A77A-4EBB-B1E2-A037C2CBCB4B"
+            uuid = "E250E173-660A-4316-B82D-FE9503FEA790"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
+            filePath = "DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "showAddNote()"
+            startingLineNumber = "384"
+            endingLineNumber = "384"
+            landmarkName = "saveTapped()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "38157B12-B973-4D2A-94F3-7D99276D238C"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "19"
-            endingLineNumber = "19"
-            landmarkName = "showAddNote()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "AD780B37-C7F6-48AF-B584-184F820FC6DC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Modules/Home/HomeViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "didTapAddNote()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "61C540E3-BCFF-444E-AC79-F22CFAF91298"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "17"
-            endingLineNumber = "17"
-            landmarkName = "showAddNote()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "87909618-D050-400A-AF41-D95E90C43535"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Modules/Home/HomeViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "init(coordinator:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "74906DD2-BF64-4101-9488-14157C9D20CE"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "12"
-            endingLineNumber = "12"
-            landmarkName = "start()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E56CD096-DBBB-4167-AB4E-08B526F60969"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "13"
-            endingLineNumber = "13"
-            landmarkName = "start()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1D985650-8665-4DDC-BD6F-04DF24341689"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/HomeCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "start()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "474C5DFB-9C43-4130-B252-9AEBC624EAB9"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DayDay/Coordinators/TabBarCoordinator.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "start()"
-            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "E250E173-660A-4316-B82D-FE9503FEA790 - fa071228ebfa5e0e"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (__C.UIAlertAction) -&gt; () in closure #3 @Swift.MainActor () -&gt; () in closure #1 (Swift.Result&lt;DayDay.GeneratedNotesResponse, Swift.Error&gt;) -&gt; () in DayDay.AddNoteViewController.saveTapped() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "384"
+                  endingLineNumber = "384">
+               </Location>
+               <Location
+                  uuid = "E250E173-660A-4316-B82D-FE9503FEA790 - cf5cd1d9aad38ca5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;DayDay.PostDailyNotesResponse, Swift.Error&gt;) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in closure #3 @Swift.MainActor () -&gt; () in closure #1 (Swift.Result&lt;DayDay.GeneratedNotesResponse, Swift.Error&gt;) -&gt; () in DayDay.AddNoteViewController.saveTapped() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386">
+               </Location>
+               <Location
+                  uuid = "E250E173-660A-4316-B82D-FE9503FEA790 - cf5cd1d9aad38ca5"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Swift.Result&lt;DayDay.PostDailyNotesResponse, Swift.Error&gt;) -&gt; () in closure #1 (__C.UIAlertAction) -&gt; () in closure #3 @Swift.MainActor () -&gt; () in closure #1 (Swift.Result&lt;DayDay.GeneratedNotesResponse, Swift.Error&gt;) -&gt; () in DayDay.AddNoteViewController.saveTapped() -&gt; ()"
+                  moduleName = "DayDay.debug.dylib"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/alikhanaghazada/Documents/GitHub/DayDay/DayDay/Modules/Home/AddNote/AddNoteViewController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "386"
+                  endingLineNumber = "386">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

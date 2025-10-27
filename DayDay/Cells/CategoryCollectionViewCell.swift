@@ -18,8 +18,24 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
         let label = UILabel()
         label.font = .systemFont(ofSize: 14)
         label.textColor = .label
-        
+        label.numberOfLines = .zero
         return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .light)
+        label.textColor = .secondaryLabel
+        label.numberOfLines = .zero
+        return label
+    }()
+    
+    private let titlesStackView: UIStackView = {
+        let sv = UIStackView()
+        sv.axis = .vertical
+        sv.spacing = 4
+        
+        return sv
     }()
     
     override init(frame: CGRect) {
@@ -40,22 +56,27 @@ final class CategoryCollectionViewCell: UICollectionViewCell {
     
     private func addSubviews() {
         addSubview(effectView)
-        effectView.contentView.addSubview(titleLabel)
+        effectView.contentView.addSubview(titlesStackView)
+        [
+            titleLabel,
+            subtitleLabel
+        ].forEach(titlesStackView.addArrangedSubview)
     }
     
     private func configureContraints() {
         effectView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
-        titleLabel.snp.makeConstraints { make in
-            make.center.equalToSuperview()
+        titlesStackView.snp.makeConstraints { make in
+            make.edges.equalToSuperview().inset(16)
         }
     }
 }
 
 
 extension CategoryCollectionViewCell {
-    func configure(title: String) {
+    func configure(title: String, subTitle: String) {
         titleLabel.text = title
+        subtitleLabel.text = subTitle
     }
 }

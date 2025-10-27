@@ -7,19 +7,20 @@
 
 import UIKit
 import SnapKit
+import Alamofire
 
 final class HomeViewController: UIViewController {
     // MARK: - ViewModel
     private let viewModel: HomeViewModel
     
-    private let strings: [String] = [
-        "Finance",
-        "Health",
-        "Love",
-        "Work",
-        "Personal",
-        "Other",
-    ]
+    // Refactor
+    private var strings: [String] = [] {
+        didSet {
+            collectionView.reloadData()
+        }
+    }
+    
+    private var subtitles: [String] = []
     
     //MARK: - Views
     private lazy var addButton: UIButton = {
@@ -34,6 +35,14 @@ final class HomeViewController: UIViewController {
         button.addTarget(self, action: #selector(addTapped), for: .touchUpInside)
         
         return button
+    }()
+    
+    // Loading indicator
+    private let activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .large)
+        indicator.hidesWhenStopped = true
+        indicator.color = .secondaryLabel
+        return indicator
     }()
     
     // TODO: - Make UICollectionViewCompositionalLayout
@@ -67,13 +76,38 @@ final class HomeViewController: UIViewController {
         collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: CategoryCollectionViewCell.identifier)
         addSubViews()
         configureContraints()
+        
+        // Start loading
+        startLoading()
+        
+        let url = "https://dayday.azurewebsites.net/api/categories"
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: Categories.self) { [weak self] response in
+                guard let self else { return }
+                switch response.result {
+                case .success(let categories):
+                    let names = categories.dailyCategories.map { $0.name }
+                    let descs = categories.dailyCategories.map { $0.description }
+                    DispatchQueue.main.async {
+                        self.strings = names
+                        self.subtitles = descs
+                        self.stopLoading()
+                    }
+                case .failure(let error):
+                    print("Failed to fetch categories: \(error)")
+                    DispatchQueue.main.async {
+                        self.stopLoading()
+                    }
+                }
+            }
     }
     
     // MARK: - Private methods
     private func addSubViews() {
         view.addSubview(collectionView)
         view.addSubview(addButton)
-
+        view.addSubview(activityIndicator)
     }
     
     private func configureContraints() {
@@ -86,6 +120,21 @@ final class HomeViewController: UIViewController {
         collectionView.snp.makeConstraints { make in
             make.edges.equalToSuperview()
         }
+        
+        activityIndicator.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    private func startLoading() {
+        activityIndicator.startAnimating()
+        collectionView.isUserInteractionEnabled = false
+        view.isUserInteractionEnabled = true
+    }
+    
+    private func stopLoading() {
+        activityIndicator.stopAnimating()
+        collectionView.isUserInteractionEnabled = true
     }
     
     @objc private func addTapped() {
@@ -101,7 +150,7 @@ extension HomeViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategoryCollectionViewCell.identifier, for: indexPath) as! CategoryCollectionViewCell
-        cell.configure(title: strings[indexPath.row])
+        cell.configure(title: strings[indexPath.row], subTitle: subtitles[indexPath.row])
         
         return cell
     }
@@ -110,6 +159,25 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: - UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print("")
+        let categoryName = strings[indexPath.row]
+        viewModel.didSelectCategory(name: categoryName)
     }
 }
+
+// MARK: - Models
+// Keep the model types at the top level and make their Decodable conformances nonisolated.
+
+struct Categories {
+    var dailyCategories: [Category]
+}
+
+struct Category: Sendable {
+    let id: Int
+    let name: String
+    let description: String
+}
+
+// Provide nonisolated Decodable conformances via extensions to avoid inheriting any actor isolation.
+nonisolated extension Categories: Decodable { }
+nonisolated extension Category: Decodable { }
+
